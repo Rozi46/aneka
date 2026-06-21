@@ -97,7 +97,7 @@
 										</div>
 										<div class="col-md-12 bg_form_page">
                                             <div class="form-group row form_input text-left">
-                                                <label class="col-sm-2 col-form-label">Mekanik<span>*</span></label>
+                                                <label class="col-sm-2 col-form-label">Customer Service<span>*</span></label>
                                                 <div class="col-sm-10 input">                                                          
                                                     <select id="nama_mekanik" name="nama_mekanik" placeholder="Pilih Mekanik" multiple>	
                                                         @foreach ($list_mekanik as $view_data)
