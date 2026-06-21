@@ -54,7 +54,7 @@
 													<th style="min-width:140px; text-align: center;">Tanggal</th>
 													<th class="colleft" style="min-width:150px; text-align: center;">No. Penjualan</th>
 													<th style="min-width:170px; text-align: center;">Penjualan Oleh</th>
-													<th style="min-width:170px; text-align: center;">Nama Mekanik</th>
+													<th style="min-width:170px; text-align: center;">Customer Service</th>
 													<th style="min-width:260px; text-align: center;">Nama Customer</th>
 
 													<th style="min-width:300px; text-align: center;">Nama Produk</th>

@@ -135,7 +135,7 @@
             $this->Cell(6);
             $this->Cell(94,$seth,($getdata['detail_customer']['alamat'] ?? 'Belum ditentukan'),0,0);
 
-            $this->Cell(25,$seth,'Nama Mekanik',0,0);
+            $this->Cell(25,$seth,'Customer Service',0,0);
             $this->Cell(3,$seth,':',0,0);
             $this->MultiCell(0,$seth,$namaMekanik,0);
 

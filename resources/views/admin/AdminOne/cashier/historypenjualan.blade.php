@@ -64,7 +64,7 @@
 													<th style="min-width:125px; text-align: center;">Grand Total</th>
 													<th style="min-width:125px; text-align: center;">Ket</th>
 													<th style="min-width:125px; text-align: center;">Gudang</th>
-													<th style="min-width:170px; text-align: center;">Nama Mekanik</th>
+													<th style="min-width:170px; text-align: center;">Customer Service</th>
 													<th style="min-width:170px; text-align: center;">Penjualan Oleh</th>
 													<th style="width:120px; text-align: center;">Status</th>
 													<th class="colright" style="min-width:30px; text-align: center;"><i class="head fa fa-cog"></i></th>

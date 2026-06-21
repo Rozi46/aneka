@@ -756,7 +756,7 @@ class PDF extends MultiCellTable
 
         if(!empty($getdata['detail_mekanik'])){
             $mekanik = implode(', ', array_column($getdata['detail_mekanik'],'nama'));
-            $this->MultiCell(0,4,'Mekanik : '.$mekanik,0,'L');
+            $this->MultiCell(0,4,'Customer Service : '.$mekanik,0,'L');
         }
 
         $this->Ln(2);
