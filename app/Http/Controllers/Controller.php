@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\{Carbon, Str};
 
 class Controller extends BaseController
 {
@@ -210,7 +210,7 @@ class Controller extends BaseController
                 return strtoupper(Str::random($length));
 
             default:
-                throw new InvalidArgumentException("Type harus 'letters', 'numbers', atau 'mixed'");
+                throw new \InvalidArgumentException("Type harus 'letters', 'numbers', atau 'mixed'");
         }
     }
     // Contoh pemakaian
