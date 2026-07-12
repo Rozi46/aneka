@@ -19,7 +19,7 @@ class SistemController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
 
-        if(empty(session('key_token_perdana'))){            
+        if(empty(session('key_token_aneka'))){            
             return view('admin.AdminOne.login',['url' => 'login']);
         }else{
             return redirect('/admin/dash');
@@ -51,13 +51,13 @@ class SistemController extends Controller
         	$detailadmin = $getdata[0]['detailadmin'][0];
             
             if($detailadmin['level']=='LV7622003'){
-                Session::put('key_token_perdana_cash',$results['key_token']);
-                Session::put('admin_login_perdana_cash',$detailadmin['id']);    
+                Session::put('key_token_aneka_cash',$results['key_token']);
+                Session::put('admin_login_aneka_cash',$detailadmin['id']);    
                 $this->backup_database();    
                 return redirect('/cash/dash');
             }else{
-                Session::put('key_token_perdana',$results['key_token']);
-                Session::put('admin_login_perdana',$detailadmin['id']);
+                Session::put('key_token_aneka',$results['key_token']);
+                Session::put('admin_login_aneka',$detailadmin['id']);
                 $this->backup_database();
                 return redirect('/admin/dash');
             }
@@ -70,18 +70,18 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-    	$key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+    	$key_token = session('key_token_aneka');
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $response = app('App\Http\Controllers\ApiController')->logout($request);  
         $results = is_array($response) ? $response : $response->getData(true); 
 
-        Session::forget('key_token_perdana');
-        Session::forget('admin_login_perdana');
+        Session::forget('key_token_aneka');
+        Session::forget('admin_login_aneka');
 
-        Cookie::queue(Cookie::forget('key_token_perdana'));
+        Cookie::queue(Cookie::forget('key_token_aneka'));
 
         $this->backup_database();
 
@@ -90,13 +90,13 @@ class SistemController extends Controller
 
     public function dash(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -132,13 +132,13 @@ class SistemController extends Controller
 
     public function settingmenu(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -175,13 +175,13 @@ class SistemController extends Controller
 
     public function listcompany(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -223,13 +223,13 @@ class SistemController extends Controller
 
     public function newcompany(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -260,13 +260,13 @@ class SistemController extends Controller
 
     public function editcompany(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -304,13 +304,13 @@ class SistemController extends Controller
 
     public function manualbook(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -352,13 +352,13 @@ class SistemController extends Controller
 
     public function viewmanualbook(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -419,8 +419,8 @@ class SistemController extends Controller
         	$detailadmin = $getdata[0]['detailadmin'][0];
             
             if($detailadmin['level']=='LV7622003'){
-                Session::put('key_token_perdana_cash',$results['key_token']);
-                Session::put('admin_login_perdana_cash',$detailadmin['id']);    
+                Session::put('key_token_aneka_cash',$results['key_token']);
+                Session::put('admin_login_aneka_cash',$detailadmin['id']);    
                 $this->backup_database();    
                 return redirect('/cash/dash');
             }else{
@@ -435,18 +435,18 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $response = app('App\Services\ApiServiceCashier')->logoutCashier($request);  
         $results = is_array($response) ? $response : $response->getData(true); 
 
-        Session::forget('key_token_perdana_cash');
-        Session::forget('admin_login_perdana_cash');
+        Session::forget('key_token_aneka_cash');
+        Session::forget('admin_login_aneka_cash');
 
-        Cookie::queue(Cookie::forget('key_token_perdana_cash'));
+        Cookie::queue(Cookie::forget('key_token_aneka_cash'));
 
         $this->backup_database();
 
@@ -458,15 +458,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user_cashier($request);       
@@ -500,15 +500,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             $response = app('App\Services\ApiServiceCashier')->listbarangtransaksi($request);
@@ -522,15 +522,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             $response = app('App\Services\ApiServiceCashier')->listopcustomer($request);
@@ -544,13 +544,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{    
             $get_user = $this->get_user_cashier($request);          
@@ -586,15 +586,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{    
             $get_user = $this->get_user_cashier($request);           
@@ -627,15 +627,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{   
             $get_user = $this->get_user_cashier($request);            
@@ -668,15 +668,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user_cashier($request);          
@@ -735,15 +735,15 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user_cashier($request);            
@@ -791,13 +791,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user_cashier($request);            
@@ -833,13 +833,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana_cash');
-    	$key_token = session('key_token_perdana_cash');
+    	$admin_login = session('admin_login_aneka_cash');
+    	$key_token = session('key_token_aneka_cash');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana_cash'))){
+    	if(empty(session('key_token_aneka_cash'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user_cashier($request);            
@@ -868,13 +868,13 @@ class SistemController extends Controller
     // Isi Combobox
     public function getsatuanpecahan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -889,13 +889,13 @@ class SistemController extends Controller
 
     public function get_satuan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -910,13 +910,13 @@ class SistemController extends Controller
 
     public function get_kategori(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -931,13 +931,13 @@ class SistemController extends Controller
 
     public function get_merk(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -952,13 +952,13 @@ class SistemController extends Controller
 
     public function get_supplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -973,13 +973,13 @@ class SistemController extends Controller
 
     public function get_gudang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -994,13 +994,13 @@ class SistemController extends Controller
 
     public function get_cabang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1016,13 +1016,13 @@ class SistemController extends Controller
     // Auto Complete
     public function listopsupplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1037,13 +1037,13 @@ class SistemController extends Controller
 
     public function listbarangtransaksi(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1059,13 +1059,13 @@ class SistemController extends Controller
     
     public function listopcustomer(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1081,13 +1081,13 @@ class SistemController extends Controller
     //Admin
     public function editaccount(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1119,13 +1119,13 @@ class SistemController extends Controller
     // Barang
     public function listbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1168,13 +1168,13 @@ class SistemController extends Controller
 
     public function exportlistbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -1197,13 +1197,13 @@ class SistemController extends Controller
 
     public function newbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1246,13 +1246,13 @@ class SistemController extends Controller
 
     public function editbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1298,13 +1298,13 @@ class SistemController extends Controller
     // Jasa
     public function listjasa(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1348,13 +1348,13 @@ class SistemController extends Controller
 
     public function exportlistjasa(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -1377,13 +1377,13 @@ class SistemController extends Controller
 
     public function newjasa(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1423,13 +1423,13 @@ class SistemController extends Controller
 
     public function editjasa(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1472,13 +1472,13 @@ class SistemController extends Controller
     // Satuan
     public function listsatuan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1522,13 +1522,13 @@ class SistemController extends Controller
 
     public function exportlistsatuan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -1551,13 +1551,13 @@ class SistemController extends Controller
 
     public function newsatuan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1593,13 +1593,13 @@ class SistemController extends Controller
 
     public function editsatuan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1640,13 +1640,13 @@ class SistemController extends Controller
     // Kategori
     public function listkategori(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1690,13 +1690,13 @@ class SistemController extends Controller
 
     public function exportlistkategori(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -1719,13 +1719,13 @@ class SistemController extends Controller
 
     public function newkategori(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1760,13 +1760,13 @@ class SistemController extends Controller
 
     public function editkategori(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1807,13 +1807,13 @@ class SistemController extends Controller
     // Merk
     public function listmerk(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1857,13 +1857,13 @@ class SistemController extends Controller
 
     public function exportlistmerk(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -1886,13 +1886,13 @@ class SistemController extends Controller
 
     public function newmerk(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1927,13 +1927,13 @@ class SistemController extends Controller
 
     public function editmerk(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -1974,13 +1974,13 @@ class SistemController extends Controller
     // Data Supplier
     public function listsupplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2024,13 +2024,13 @@ class SistemController extends Controller
 
     public function exportlistsupplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -2053,13 +2053,13 @@ class SistemController extends Controller
 
     public function newsupplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2094,13 +2094,13 @@ class SistemController extends Controller
 
     public function editsupplier(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2141,13 +2141,13 @@ class SistemController extends Controller
     // Data Customer
     public function listcustomer(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2191,13 +2191,13 @@ class SistemController extends Controller
 
     public function exportlistcustomer(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -2220,13 +2220,13 @@ class SistemController extends Controller
 
     public function newcustomer(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2259,13 +2259,13 @@ class SistemController extends Controller
 
     public function editcustomer(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2306,13 +2306,13 @@ class SistemController extends Controller
     // Data Karyawan
     public function listkaryawan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2354,13 +2354,13 @@ class SistemController extends Controller
 
     public function exportlistkaryawan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -2383,13 +2383,13 @@ class SistemController extends Controller
 
     public function newkaryawan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2422,13 +2422,13 @@ class SistemController extends Controller
 
     public function editkaryawan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2469,13 +2469,13 @@ class SistemController extends Controller
     // Data Gudang
     public function listgudang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2513,13 +2513,13 @@ class SistemController extends Controller
 
     public function exportlistgudang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -2534,13 +2534,13 @@ class SistemController extends Controller
 
     public function newgudang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2569,13 +2569,13 @@ class SistemController extends Controller
 
     public function editgudang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2612,13 +2612,13 @@ class SistemController extends Controller
     // Data Cabang
     public function listcabang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2660,13 +2660,13 @@ class SistemController extends Controller
 
     public function exportlistcabang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');        
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');        
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2679,13 +2679,13 @@ class SistemController extends Controller
 
     public function newcabang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2718,13 +2718,13 @@ class SistemController extends Controller
 
     public function editcabang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2765,13 +2765,13 @@ class SistemController extends Controller
     // Pengguna
     public function listusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2816,14 +2816,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             $datetime_now = date('Y-m-d-His');
@@ -2834,13 +2834,13 @@ class SistemController extends Controller
 
     public function newusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2875,13 +2875,13 @@ class SistemController extends Controller
 
     public function editusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2924,13 +2924,13 @@ class SistemController extends Controller
     // Level Pengguna
     public function levelusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -2972,13 +2972,13 @@ class SistemController extends Controller
 
     public function newlevelusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3011,13 +3011,13 @@ class SistemController extends Controller
 
     public function editlevel(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3060,13 +3060,13 @@ class SistemController extends Controller
     // Aktifitas Pengguna
     public function activityusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3121,13 +3121,13 @@ class SistemController extends Controller
 
     public function exportactivityusers(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -3164,13 +3164,13 @@ class SistemController extends Controller
     // Data Pembelian Barang
     public function menupembelianbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3228,13 +3228,13 @@ class SistemController extends Controller
 
     public function viewpembelian(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3284,13 +3284,13 @@ class SistemController extends Controller
 
     public function listprodpembelian(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3329,13 +3329,13 @@ class SistemController extends Controller
 
     public function summarypembelian(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3374,13 +3374,13 @@ class SistemController extends Controller
 
     public function historypembelianbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3443,13 +3443,13 @@ class SistemController extends Controller
 
     public function exportpembelianbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -3529,13 +3529,13 @@ class SistemController extends Controller
 
     public function printpurchaseorder(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3573,13 +3573,13 @@ class SistemController extends Controller
     // Data Penjualan Barang
     public function menupenjualanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3637,13 +3637,13 @@ class SistemController extends Controller
 
     public function viewpenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3696,13 +3696,13 @@ class SistemController extends Controller
 
     public function listprodpenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3741,13 +3741,13 @@ class SistemController extends Controller
 
     public function summarypenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3786,13 +3786,13 @@ class SistemController extends Controller
 
     public function historypenjualanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3855,13 +3855,13 @@ class SistemController extends Controller
 
     public function exportpenjualanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -3941,13 +3941,13 @@ class SistemController extends Controller
 
     public function printsalesorder(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -3992,13 +3992,13 @@ class SistemController extends Controller
     // Data Penerimaan Barang
     public function penerimaanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4050,13 +4050,13 @@ class SistemController extends Controller
 
     public function listoppembelian(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4071,13 +4071,13 @@ class SistemController extends Controller
 
     public function detailoppembelian(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4092,13 +4092,13 @@ class SistemController extends Controller
 
     public function listprodpenerimaan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4153,13 +4153,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -4198,13 +4198,13 @@ class SistemController extends Controller
 
     public function historypenerimaan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4267,13 +4267,13 @@ class SistemController extends Controller
 
     public function exportpenerimaanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -4353,13 +4353,13 @@ class SistemController extends Controller
 
     public function printpenerimaan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4404,13 +4404,13 @@ class SistemController extends Controller
     // Data Pengiriman Barang
     public function pengirimanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4462,13 +4462,13 @@ class SistemController extends Controller
 
     public function listoppenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4483,13 +4483,13 @@ class SistemController extends Controller
 
     public function detailoppenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4504,13 +4504,13 @@ class SistemController extends Controller
 
     public function listprodpengiriman(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4564,13 +4564,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -4609,13 +4609,13 @@ class SistemController extends Controller
 
     public function historypengiriman(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4678,13 +4678,13 @@ class SistemController extends Controller
 
     public function exportpengirimanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -4764,13 +4764,13 @@ class SistemController extends Controller
 
     public function printpengiriman(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4815,13 +4815,13 @@ class SistemController extends Controller
     // Data Penyesuaian Stock Barang
     public function penyesuaianstockbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4872,13 +4872,13 @@ class SistemController extends Controller
 
     public function listbarangstockopname(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4893,13 +4893,13 @@ class SistemController extends Controller
 
     public function liststockbarangSO(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4914,13 +4914,13 @@ class SistemController extends Controller
 
     public function historypenyesuaianstockbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -4975,13 +4975,13 @@ class SistemController extends Controller
 
     public function exporthistorypenyesuaianstockbarang (Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -5036,13 +5036,13 @@ class SistemController extends Controller
     // Data History Stock Barang
     public function historystockbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5100,13 +5100,13 @@ class SistemController extends Controller
 
     public function exporthistorystockbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5169,13 +5169,13 @@ class SistemController extends Controller
     // Data Persediaan Barang
     public function persediaanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5231,13 +5231,13 @@ class SistemController extends Controller
 
     public function exportpersediaanbarang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5282,13 +5282,13 @@ class SistemController extends Controller
     // Mutasi Kirim
     public function mutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5341,13 +5341,13 @@ class SistemController extends Controller
 
     public function viewmutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5395,13 +5395,13 @@ class SistemController extends Controller
 
     public function listprodmutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5440,13 +5440,13 @@ class SistemController extends Controller
 
     public function historymutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5509,13 +5509,13 @@ class SistemController extends Controller
 
     public function exportmutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -5595,13 +5595,13 @@ class SistemController extends Controller
 
     public function printmutasikirim(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5646,13 +5646,13 @@ class SistemController extends Controller
     // Mutasi Terima
     public function mutasiterima(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5703,13 +5703,13 @@ class SistemController extends Controller
 
     public function listopmutasi(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5724,13 +5724,13 @@ class SistemController extends Controller
 
     public function detailopmutasi(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5745,13 +5745,13 @@ class SistemController extends Controller
 
     public function listprodmutasiterima(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5800,13 +5800,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -5845,13 +5845,13 @@ class SistemController extends Controller
 
     public function historymutasiterima(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5914,13 +5914,13 @@ class SistemController extends Controller
 
     public function printmutasiterima(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -5964,13 +5964,13 @@ class SistemController extends Controller
 
     public function exportmutasiterima(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -6051,13 +6051,13 @@ class SistemController extends Controller
     // Data Penerimaan Kas
     public function menupenerimaankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6115,13 +6115,13 @@ class SistemController extends Controller
 
     public function historypenerimaankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6175,13 +6175,13 @@ class SistemController extends Controller
 
     public function exportpenerimaankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -6246,13 +6246,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -6291,13 +6291,13 @@ class SistemController extends Controller
 
     public function printpenerimaankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6342,13 +6342,13 @@ class SistemController extends Controller
     // Data Pengeluaran Kas
     public function menupengeluarankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6408,13 +6408,13 @@ class SistemController extends Controller
 
     public function historypengeluarankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6468,13 +6468,13 @@ class SistemController extends Controller
 
     public function exportpengeluarankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -6539,13 +6539,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -6584,13 +6584,13 @@ class SistemController extends Controller
 
     public function printpengeluarankas(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6635,13 +6635,13 @@ class SistemController extends Controller
     // Data Pembayaran Pembelian - Purchase Payment - Hutang
     public function menupembayaranhutang (Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6699,13 +6699,13 @@ class SistemController extends Controller
 
     public function listpurchasepayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6720,13 +6720,13 @@ class SistemController extends Controller
 
     public function detailpurchasepayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6741,13 +6741,13 @@ class SistemController extends Controller
 
     public function historypembayaranhutang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6801,13 +6801,13 @@ class SistemController extends Controller
 
     public function exportpurchasepayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -6872,13 +6872,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -6917,13 +6917,13 @@ class SistemController extends Controller
 
     public function printpurchasepayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -6968,13 +6968,13 @@ class SistemController extends Controller
     // Data Pembayaran Penjualan - Sales Payment - Piutang
     public function menupembayaranpiutang (Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7032,13 +7032,13 @@ class SistemController extends Controller
 
     public function listsalespayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7053,13 +7053,13 @@ class SistemController extends Controller
 
     public function detailsalespayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{             
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7074,13 +7074,13 @@ class SistemController extends Controller
 
     public function historypembayaranpiutang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7134,13 +7134,13 @@ class SistemController extends Controller
 
     public function exportsalespayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -7205,13 +7205,13 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-        $admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+        $admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7250,13 +7250,13 @@ class SistemController extends Controller
 
     public function printsalespayment(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7303,8 +7303,8 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-    	$key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+    	$key_token = session('key_token_aneka');
         $load_app = $request->load;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
@@ -7319,7 +7319,7 @@ class SistemController extends Controller
             $vd = '999999999999999';
         }
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7371,14 +7371,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7411,13 +7411,13 @@ class SistemController extends Controller
     // Daftar Hutang
     public function menuhutang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7470,14 +7470,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7526,13 +7526,13 @@ class SistemController extends Controller
     
     public function kartuhutang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7577,14 +7577,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7625,13 +7625,13 @@ class SistemController extends Controller
     // Tagihan
     public function menutagihan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7684,14 +7684,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7740,13 +7740,13 @@ class SistemController extends Controller
     
     public function kartupiutang(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             
             $request['url_api'] = $url_api;
             $request['u'] = $admin_login;
@@ -7791,14 +7791,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7839,13 +7839,13 @@ class SistemController extends Controller
     // PPN
     public function menuppn(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7898,14 +7898,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            
@@ -7938,13 +7938,13 @@ class SistemController extends Controller
     // Rekap Pembelian Penjualan
     public function rekappembelianpenjualan(Request $request)
     {
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             date_default_timezone_set('Asia/Jakarta');
             $url_api =  env('APP_API');
-            $admin_login = session('admin_login_perdana');
-            $key_token = session('key_token_perdana');
+            $admin_login = session('admin_login_aneka');
+            $key_token = session('key_token_aneka');
             $load_app = $request->load;
             $request['u'] = $admin_login;
             $request['token'] = $key_token;
@@ -7995,14 +7995,14 @@ class SistemController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
         $request['token'] = $key_token;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('/admin/logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{  
             $get_user = $this->get_user($request);            

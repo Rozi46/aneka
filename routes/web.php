@@ -10,7 +10,7 @@ Route::get('/admin', function () {
 });
 
 Route::get('/admin/administration', function () {
-    if (Session::get('admin_login_perdana')) {
+    if (Session::get('admin_login_aneka')) {
         return redirect()->route('dash');
 	}else{
 		return view('admin.AdminOne.login', ['url' => 'login']);
@@ -40,7 +40,7 @@ Route::get('/admin/dash',[SistemController::class, 'dash'])->name('dash');
 		});
 
 		Route::get('/cash/login', function () {
-			if(session('admin_login_perdana_cash')){
+			if(session('admin_login_aneka_cash')){
 				return redirect('cash.dash');
 			}else{
 				return view('admin.AdminOne.cashier.login',['url' => 'login_cashier']);

@@ -356,7 +356,7 @@
 
                                             $.ajax({
                                                 type: "POST",
-                                                url: "/admin/savepenyesuaianstock?_token={{csrf_token()}}&token={{$request['token']}}&u={{$request['admin_login_perdana']}}",
+                                                url: "/admin/savepenyesuaianstock?_token={{csrf_token()}}&token={{$request['token']}}&u={{$request['admin_login_aneka']}}",
                                                 data:"code_data="+code_data+"&code_transaksi="+code_transaksi+"&tgl_transaksi="+tgl_transaksi+"&data_gudang="+data_gudang+"&code_barang="+code_barang+"&<?php foreach ($list_gudang['results'] as $view_data) {?>stock_awal_<?php echo $view_data['code_data']; ?>="+stock_awal_<?php echo $view_data['code_data']; ?>+"&selisih_stock_<?php echo $view_data['code_data']; ?>="+selisih_stock_<?php echo $view_data['code_data']; ?>+"&stock_akhir_<?php echo $view_data['code_data']; ?>="+stock_akhir_<?php echo $view_data['code_data']; ?>+"&<?php } ?>keterangan="+encodeURIComponent(keterangan),
                                                 cache: false,
                                                 success: function(data){

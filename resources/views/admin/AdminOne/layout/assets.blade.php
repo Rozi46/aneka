@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@yield('title') | PerdanaMotor</title>
+        <title>@yield('title') | Aneka</title>
         <link rel="shortcut icon" href="{{ url('/themes/admin/AdminOne/image/public/icon.png') }}"/>
 
         {{-- CSS --}}
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="{{ url('/themes/admin/AdminOne/select/css/select2.min.css') }}"/>
 
         {{-- Tambahan CSS untuk login jika belum login --}}
-        @if (!session('admin_login_perdana'))  
+        @if (!session('admin_login_aneka'))  
             <link rel="stylesheet" href="{{ url('/themes/admin/AdminOne/css/login.css') }}">
         @endif
 
@@ -41,7 +41,7 @@
         <script src="{{url('/themes/admin/AdminOne/select/js/select2.min.js')}}"></script>
     </head>
     <body line="linebody" class="linebody">
-        @if (session('admin_login_perdana'))
+        @if (session('admin_login_aneka'))
             @if (!isset($request['tipe_page']) || $request['tipe_page'] != 'full')
                 @include('admin.AdminOne.layout.header')
                 @include('admin.AdminOne.layout.sidebar')

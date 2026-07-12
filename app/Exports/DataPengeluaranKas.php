@@ -39,8 +39,8 @@ class DataPengeluaranKas implements FromView, WithColumnFormatting
         $request = $this->request;
         date_default_timezone_set('Asia/Jakarta');
         $url_api =  env('APP_API');
-    	$admin_login = session('admin_login_perdana');
-        $key_token = session('key_token_perdana');
+    	$admin_login = session('admin_login_aneka');
+        $key_token = session('key_token_aneka');
         
         $request['url_api'] = $url_api;
         $request['u'] = $admin_login;
@@ -48,7 +48,7 @@ class DataPengeluaranKas implements FromView, WithColumnFormatting
 
         $vd = $request->filled('vd') ? $request->vd : 20;
 
-    	if(empty(session('key_token_perdana'))){
+    	if(empty(session('key_token_aneka'))){
     		return redirect('logout')->with('error','Terjadi kesalahan!!! silahkan hubungi kami');
     	}else{ 
             $get_user = app('App\Http\Controllers\ApiController')->getadmin($request);           
